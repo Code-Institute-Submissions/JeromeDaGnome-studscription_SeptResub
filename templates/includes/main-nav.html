@@ -5,9 +5,9 @@
                 Sub Tiers
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="" class="dropdown-item">Small Sub</a>
-                <a href="" class="dropdown-item ">Medium Sub</a>
-                <a href="" class="dropdown-item ">Large Sub</a>
+                <a href="{% url 'products' %}?category=smallsub" class="dropdown-item">Small Sub</a>
+                <a href="{% url 'products' %}?category=mediumsub" class="dropdown-item ">Medium Sub</a>
+                <a href="{% url 'products' %}?category=largesub" class="dropdown-item ">Large Sub</a>
             </div>
         </li>
 
@@ -16,9 +16,9 @@
                 One Shots
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-                <a href="" class="dropdown-item">Small One Shot</a>
-                <a href="" class="dropdown-item ">Medium One Shot</a>
-                <a href="" class="dropdown-item ">Large One Shot</a>
+                <a href="{% url 'products' %}?category=smalloneshot" class="dropdown-item">Small One Shot</a>
+                <a href="{% url 'products' %}?category=mediumoneshot" class="dropdown-item ">Medium One Shot</a>
+                <a href="{% url 'products' %}?category=largeoneshot" class="dropdown-item ">Large One Shot</a>
             </div>
         </li>
 
@@ -27,10 +27,9 @@
                 Specials
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="" class="dropdown-item">Sub Deals</a>
-                <a href="" class="dropdown-item">Gift Subs</a>
-                <a href="" class="dropdown-item">One Shot Boxes</a>
-                <a href="" class="dropdown-item">Holiday Specials</a>
+                <a href="{% url 'products' %}?category=subdeals" class="dropdown-item">Sub Deals</a>
+                <a href="{% url 'products' %}?category=giftsubs" class="dropdown-item">Gift Subs</a>
+                <a href="{% url 'products' %}?category=holidayspecials" class="dropdown-item">Holiday Specials</a>
             </div>
         </li>
     </ul>
