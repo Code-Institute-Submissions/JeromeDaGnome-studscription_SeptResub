@@ -1,0 +1,1 @@
+web: gunicorn studscription.wsgi:application
