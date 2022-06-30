@@ -29,9 +29,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 #SECRET_KEY = stripe.api_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+#DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['studscription.herokuapp.com', 'localhost']
+DEBUG = True
+
+#ALLOWED_HOSTS = ['studscription.herokuapp.com', 'localhost']
 
 
 # Application definition
