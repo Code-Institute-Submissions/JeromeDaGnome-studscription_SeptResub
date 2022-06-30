@@ -129,6 +129,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
     got absolutely nowhere.
 -   Attempting to go back to previous versions has proved fruitless, haven't been able to determine 
     source of bugs.
+-   Heroku app finally working but still no images or stripe functionality.  
 
 ### GitHub Pages
 
