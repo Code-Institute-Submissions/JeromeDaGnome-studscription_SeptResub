@@ -124,7 +124,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 
 ### Known Bugs
 
--   Images have started to no longer show up after attempting to connect Stripe and Heroku.
+-   Images have started to no longer show up after attempting to connect Stripe and Heroku.  Setting DEBUG = True shows the images in the local app but not on Heroku.
 -   Stripe functionality has yet to work correctly.  Attempted fix from stripe customer service and
     got absolutely nowhere.
 -   Attempting to go back to previous versions has proved fruitless, haven't been able to determine 
