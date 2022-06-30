@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 DEBUG = True
 
-#ALLOWED_HOSTS = ['studscription.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['studscription.herokuapp.com', 'localhost']
 
 
 # Application definition
