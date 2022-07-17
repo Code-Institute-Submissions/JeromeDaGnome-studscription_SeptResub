@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '(l^nekxo4tnqaaid3*l3+8ub3sd&ipg&hm-+#
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = 'DEVELOPMENT' in os.environ
+# DEBUG = 'DEVELOPMENT' in os.environ
 
 DEBUG = False
 
