@@ -10,12 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
-
 import dj_database_url
-import stripe
-stripe.api_key = "sk_test_51LFR9kLrBu0qrSmRs6oA7gYQWaPxuWpZ3T2c5jb9bmQV7iWyrArNmUTAWiWCwBmkGmakqkVlVBYi6AUTEd4IkXx300ZtApspdx"
+
+# import stripe
+# stripe.api_key = "sk_test_51LFR9kLrBu0qrSmRs6oA7gYQWaPxuWpZ3T2c5jb9bmQV7iWyrArNmUTAWiWCwBmkGmakqkVlVBYi6AUTEd4IkXx300ZtApspdx"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', '(l^nekxo4tnqaaid3*l3+8ub3sd&ipg&hm-+#igb*af3vhl3u6')
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -53,8 +52,10 @@ INSTALLED_APPS = [
     'products',
     'bag',
     'checkout',
-    'crispy_forms',
     'profiles',
+
+    # Other
+    'crispy_forms',
     'storages',
 ]
 
@@ -183,24 +184,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # if 'USE_AWS' in os.environ:
 
-AWS_S3_OBJECT_PARAMETERS = {
-    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-    'CacheControl': 'max-age=86400',
-}
+ AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
 
 AWS_STORAGE_BUCKET_NAME = 'studscription'
 AWS_S3_REGION_NAME = 'us-west-2'
-AWS_ACCESS_KEY_ID = 'AKIAYFLHVSMV3ZYW6SGI'
-AWS_SECRET_ACCESS_KEY = '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'
-# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+# AWS_ACCESS_KEY_ID = 'AKIAYFLHVSMV3ZYW6SGI'
+# AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' 
 AWS_DEFAULT_ACL = 'public-read'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_LOCATION = 'static'
-DEFAULT_FILE_STORAGE = 'core.storages.MediaStorage'
-MEDIAFILES_LOCATION = 'media'
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
 
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
@@ -219,4 +220,15 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
-DEFAULT_FROM_EMAIL = 'studscription@example.com'
+
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'studscription@example.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
