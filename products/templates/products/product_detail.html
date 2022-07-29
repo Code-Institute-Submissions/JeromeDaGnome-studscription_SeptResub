@@ -92,7 +92,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col{% if s %}-12 mt-2{% endif %}">
                                 <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5">
                                     <span class="icon">
@@ -105,79 +104,106 @@
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             {% endwith %}
                         </div>
-                    </form>
-                    <!-- User reviews list -->
-                    <div class="col-md-8 col-lg-8 col-12 my-0" itemscope itemtype="https://schema.org/Review">
-                        <h2 class="text-center my-2 mx-0" itemprop="review">Users reviews</h2>
-                        <div class="container">
+                        <!-- User's review container-->
+                        <div class="card col-11 col-md-8 d-flex mx-auto products-container my-0">
                             <div class="row">
-                                <div class="col overflow-auto review-box">
-                                    {% if reviews %}
-                                        {% for review in reviews %}
-                                            <div class="bg-light border rounded border-dark my-3">
-                                                <p class="text-center my-0" itemprop="reviewBody">{{review.review_text}}</p>
-                                                <p class="text-center my-0" itemprop="reviewRating">
-                                                    <span
-                                                        class="fa fa-star {% if review.review_rating > 0 %} checked {% endif %}"></span>
-                                                    <span
-                                                        class="fa fa-star {% if review.review_rating > 1 %} checked {% endif %}"></span>
-                                                    <span
-                                                        class="fa fa-star {% if review.review_rating > 2 %} checked {% endif %}"></span>
-                                                    <span
-                                                        class="fa fa-star {% if review.review_rating > 3 %} checked {% endif %}"></span>
-                                                    <span
-                                                        class="fa fa-star {% if review.review_rating > 4 %} checked {% endif %}"></span>
-                                                </p>
-                                                <p class="text-muted text-end mx-3 my-0" itemprop="datePublished">
-                                                    <small>
-                                                        {{review.date_added}} - {{review.customer|title}}
-                                                    </small>
-                                                </p>
-                                                {% if request.user == review.customer %}
-                                                    <p class="my-0 mx-3 text-end">
-                                                        <small>
-                                                            <a href="{% url 'edit_review' review.id %}" class="text-black p-2">Edit</a>
-                                                            <a href="{% url 'delete_review' review.id %}" class="text-black">Delete</a>
-                                                        </small>
-                                                    </p>
-                                                {% endif %}
+                                <div class="col-md-4 col-lg-4 col-12 d-flex align-items-center" itemscope
+                                    itemtype="https://schema.org/Review">
+                                    <!-- Button trigger modal -->
+                                    {% if user.is_authenticated %}
+                                        <div class="text-center mx-auto p-3" itemprop="review">
+                                            <h3> Add your review</h3>
+                                            <div>
+                                                <button type="button" class="btn btn-warning m-2" data-bs-toggle="modal"
+                                                    data-bs-target="#add_review">
+                                                    Add product review
+                                                </button>
                                             </div>
-                                        {% endfor %}
+                                        </div>
                                     {% else %}
-                                        <div class="bg-light  my-3">
-                                            <p class="text-center my-0" itemprop="reviewBody">There's no review for this product
-                                                yet.<br>Be the first!
-                                            </p>
+                                        <div class="text-center mx-auto p-3" itemprop="review">
+                                            <h3> Login to review</h3>
+                                            <div>
+                                                <a href="{% url 'account_login' %}" class="btn btn-warning m-2">Go to Login</a>
+                                            </div>
                                         </div>
                                     {% endif %}
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Add Review Modal -->
-                        <div class="modal fade" id="add_review" tabindex="-1" aria-labelledby="add_reviewLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h2 class="modal-title text-green fw-bolder" id="add_reviewLabel">Add review</h2>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Add Review form -->
-                                        <form method="POST">
-                                            {%csrf_token%}
-                                            {{ review_form|crispy }}
-                                            <div class="text-center">
-                                                <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                                <!-- User reviews list -->
+                                <div class="col-md-8 col-lg-8 col-12 my-0" itemscope itemtype="https://schema.org/Review">
+                                    <h2 class="text-center my-2 mx-0" itemprop="review">Users reviews</h2>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col overflow-auto review-box">
+                                                {% if reviews %}
+                                                    {% for review in reviews %}
+                                                        <div class="bg-light border rounded border-dark my-3">
+                                                            <p class="text-center my-0" itemprop="reviewBody">{{review.review_text}}</p>
+                                                            <p class="text-center my-0" itemprop="reviewRating">
+                                                                <span
+                                                                    class="fa fa-star {% if review.review_rating > 0 %} checked {% endif %}"></span>
+                                                                <span
+                                                                    class="fa fa-star {% if review.review_rating > 1 %} checked {% endif %}"></span>
+                                                                <span
+                                                                    class="fa fa-star {% if review.review_rating > 2 %} checked {% endif %}"></span>
+                                                                <span
+                                                                    class="fa fa-star {% if review.review_rating > 3 %} checked {% endif %}"></span>
+                                                                <span
+                                                                    class="fa fa-star {% if review.review_rating > 4 %} checked {% endif %}"></span>
+                                                            </p>
+                                                            <p class="text-muted text-end mx-3 my-0" itemprop="datePublished">
+                                                                <small>
+                                                                    {{review.date_added}} - {{review.customer|title}}
+                                                                </small>
+                                                            </p>
+                                                            {% if request.user == review.customer %}
+                                                                <p class="my-0 mx-3 text-end">
+                                                                    <small>
+                                                                        <a href="{% url 'edit_review' review.id %}" class="text-black p-2">Edit</a>
+                                                                        <a href="{% url 'delete_review' review.id %}" class="text-black">Delete</a>
+                                                                    </small>
+                                                                </p>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <div class="bg-light  my-3">
+                                                        <p class="text-center my-0" itemprop="reviewBody">There's no review for this product
+                                                            yet.<br>Be the first!
+                                                        </p>
+                                                    </div>
+                                                {% endif %}
                                             </div>
-                                        </form>
+                                        </div>
+                                    </div>
+                                    <!-- Add Review Modal -->
+                                    <div class="modal fade" id="add_review" tabindex="-1" aria-labelledby="add_reviewLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h2 class="modal-title text-green fw-bolder" id="add_reviewLabel">Add review</h2>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Add Review form -->
+                                                    <form method="POST">
+                                                        {%csrf_token%}
+                                                        {{ review_form|crispy }}
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
