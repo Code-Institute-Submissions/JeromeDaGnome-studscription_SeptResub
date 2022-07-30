@@ -124,6 +124,30 @@
                                 Add product review
                             </button>
                         </div>
+                        <!-- Add Review Modal -->
+                        <div class="modal fade" id="add_review" tabindex="-1" aria-labelledby="add_reviewLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-green fw-bolder" id="add_reviewLabel">Add review</h2>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add Review form -->
+                                    <form method="POST">
+                                        {%csrf_token%}
+                                        {{ review_form|crispy }}
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 {% else %}
                     <div class="text-center mx-auto p-3" itemprop="review">
@@ -178,30 +202,6 @@
                                     </p>
                                 </div>
                             {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Review Modal -->
-                <div class="modal fade" id="add_review" tabindex="-1" aria-labelledby="add_reviewLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="modal-title text-green fw-bolder" id="add_reviewLabel">Add review</h2>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Add Review form -->
-                                <form method="POST">
-                                    {%csrf_token%}
-                                    {{ review_form|crispy }}
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
