@@ -64,6 +64,20 @@ def product_detail(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
 
+    if request.method == "POST" and request.user.is_authenticated:
+            review_rating = request.POST.get('review_rating', 5)
+            review_text = request.POST.get('review_text', '')
+
+            review = ProductReview.objects.create(
+                product=product,
+                customer=request.user,
+                review_rating=review_rating,
+                review_text=review_text
+                )
+            return redirect(reverse('product_details', args=[product.id]))
+
+    review_form = AddReviewForm
+    reviews = ProductReview.objects.filter(product=product.id).order_by('-date_added')[:2]
     context = {
         'product': product,
     }
