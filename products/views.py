@@ -82,6 +82,8 @@ def product_detail(request, product_id):
     reviews = ProductReview.objects.filter(product=product.id).order_by('-date_added')[:2]
     context = {
         'product': product,
+        'review_form':review_form,
+        'reviews':reviews,
     }
 
     return render(request, 'products/product_detail.html', context)
