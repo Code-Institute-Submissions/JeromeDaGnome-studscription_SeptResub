@@ -2,7 +2,7 @@ var updateBtns = document.getElementsByClassName("update-cart");
 
 for (var i = 0; i < updateBtns.length; i++) {
     updateBtns[i].addEventListener("click", function () {
-        var box_id = this.dataset.box;
+        var product_id = this.dataset.product;
         var action = this.dataset.action;
         if (user == "AnonymousUser") {
             swal({
@@ -15,11 +15,11 @@ for (var i = 0; i < updateBtns.length; i++) {
                     location.href = "/accounts/login";
               });
         } else {
-            updateUserOrder(box_id, action);
+            updateUserOrder(product_id, action);
         }
     });
 }
-function updateUserOrder(box_id, action, prod_selected_ids=getvalues()) {
+function updateUserOrder(product_id, action, prod_selected_ids=getvalues()) {
   var url = "/cart/update_cart/";
 
     fetch(url, {
@@ -28,7 +28,7 @@ function updateUserOrder(box_id, action, prod_selected_ids=getvalues()) {
             "Content-Type":"application/json",
                 "X-CSRFToken": csrftoken,
         },
-        body:JSON.stringify({"box_id": box_id, "action":action, "prod_selected_ids":prod_selected_ids})
+        body:JSON.stringify({"product_id": product_id, "action":action, "prod_selected_ids":prod_selected_ids})
     })
 
     .then((response)=>{
