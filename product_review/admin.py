@@ -1,19 +1,19 @@
 """ System Module """
 from django.contrib import admin
-from .models import BoxReview
+from .models import ProductReview
 
 
-class BoxReviewAdmin(admin.ModelAdmin):
+class ProductReviewAdmin(admin.ModelAdmin):
     """
     Create Order option on admin
     """
     list_display = [
         'customer',
         'date_added',
-        'box',
+        'product',
         'review_text',
         'review_rating',
     ]
 
 
-admin.site.register(BoxReview, BoxReviewAdmin)
+admin.site.register(ProductReview, ProductReviewAdmin)
