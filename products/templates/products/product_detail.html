@@ -126,7 +126,44 @@
                 <div class="container">
                     <div class="row">
                         <div class="col overflow-auto review-box">
-                            <!-- cut code -->
+                            {% if reviews %}
+                                {% for review in reviews %}
+                                    <div class="bg-light border rounded border-dark my-3">
+                                        <p class="text-center my-0" itemprop="reviewBody">{{review.review_text}}</p>
+                                        <p class="text-center my-0" itemprop="reviewRating">
+                                            <span
+                                                class="fa fa-star {% if review.review_rating > 0 %} checked {% endif %}"></span>
+                                            <span
+                                                class="fa fa-star {% if review.review_rating > 1 %} checked {% endif %}"></span>
+                                            <span
+                                                class="fa fa-star {% if review.review_rating > 2 %} checked {% endif %}"></span>
+                                            <span
+                                                class="fa fa-star {% if review.review_rating > 3 %} checked {% endif %}"></span>
+                                            <span
+                                                class="fa fa-star {% if review.review_rating > 4 %} checked {% endif %}"></span>
+                                        </p>
+                                        <p class="text-muted text-end mx-3 my-0" itemprop="datePublished">
+                                            <small>
+                                                {{review.date_added}} - {{review.customer|title}}
+                                            </small>
+                                        </p>
+                                        {% if request.user == review.customer %}
+                                            <p class="my-0 mx-3 text-end">
+                                                <small>
+                                                    <a href="{% url 'edit_review' review.id %}" class="text-black p-2">Edit</a>
+                                                    <a href="{% url 'delete_review' review.id %}" class="text-black">Delete</a>
+                                                </small>
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="bg-light  my-3">
+                                    <p class="text-center my-0" itemprop="reviewBody">There's no review for this product
+                                        yet.<br>Be the first!
+                                    </p>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
