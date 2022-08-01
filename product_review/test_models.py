@@ -1,8 +1,8 @@
 """ System Module """
 from django.test import TestCase
 from django.contrib.auth.models import User
-from products.models import Box
-from .models import BoxReview
+from products.models import Product
+from .models import ProductReview
 
 
 class SetupModelTestCase(TestCase):
@@ -20,25 +20,25 @@ class SetupModelTestCase(TestCase):
         self.client.login(username='joe', password='12345')
 
         # Box creation
-        self.box1 = Box.objects.create(
-            box_name='testBox1',
-            box_price=float('49.99'),
+        self.product1 = Product.objects.create(
+            product_name='testproduct1',
+            product_price=float('49.99'),
             category='Countries',
             box_description='test Box 1')
-        self.review = BoxReview.objects.create(
+        self.review = ProductReview.objects.create(
             customer=self.user,
-            box=self.box1,
+            product=self.product1,
             review_text="This is a review",
             review_rating="5",
             date_added="Oct. 24, 2021, 8:52 p.m.")
 
 
-class BoxReviewTestCase(SetupModelTestCase):
+class ProductReviewTestCase(SetupModelTestCase):
     """
-    Test BoxReview model function
+    Test ProductReview model function
     """
     def test__str__(self):
         """
         Test if order is returning correct string
         """
-        self.assertEqual(str(self.review), 'testBox1')
+        self.assertEqual(str(self.review), 'testProduct1')
