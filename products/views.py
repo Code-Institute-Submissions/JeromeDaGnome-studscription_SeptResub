@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from product_review.forms import AddReviewForm
-from product_review.models import ProductReview
+from product_review.models import CustomerReview
 from .models import Product, Category
 from .forms import ProductForm
 
@@ -71,7 +71,7 @@ def product_detail(request, product_id):
         review_rating = request.POST.get('review_rating', 5)
         review_text = request.POST.get('review_text', '')
 
-        review = ProductReview.objects.create(
+        review = CustomerReview.objects.create(
             product=product,
             customer=request.user,
             review_rating=review_rating,
@@ -80,7 +80,7 @@ def product_detail(request, product_id):
         return redirect(reverse('product_details', args=[product.id]))
 
     review_form = AddReviewForm
-    reviews = ProductReview.objects.filter(product=product.id).order_by('-date_added')[:2]
+    reviews = CustomerReview.objects.filter(product=product.id).order_by('-date_added')[:2]
     context = {
         'product': product,
         'review_form':review_form,
@@ -88,6 +88,41 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
+@login_required
+def edit_review(request, pk):
+    """
+    Edit reviews
+    """
+    review = get_object_or_404(CustomerReview, pk=pk)
+    if request.user == review.customer:
+        if request.method == 'POST':
+            form = AddReviewForm(request.POST, request.FILES, instance=review)
+            rating = request.POST.get('review_rating')
+            form.fields['review_rating'].choices = [(int(rating), int(rating))]
+            if form.is_valid():
+                form.save()
+
+                review = get_object_or_404(CustomerReview, pk=pk)
+                context = {
+                    'review': review,
+                }
+                return redirect(reverse('product_details', args=[review.product.pk]))
+            else:
+                messages.error(request, 'Failed to edit your product.\
+                    Please, ensure your form is valid')
+        else:
+            form = AddReviewForm(instance=review)
+
+        context = {
+            'form': form,
+            'review': review,
+        }
+        return render(request, 'product_review/edit_review.html', context)
+    else:
+        messages.info(request, 'Sorry, you cannot change this review.')
+        return redirect(reverse('product_details', args=[review.product.pk]))
 
 
 @login_required

@@ -1,9 +1,9 @@
 """ System Module """
 from django.contrib import admin
-from .models import ProductReview
+from .models import CustomerReview
 
 
-class ProductReviewAdmin(admin.ModelAdmin):
+class CustomerReviewAdmin(admin.ModelAdmin):
     """
     Create Order option on admin
     """
@@ -16,4 +16,4 @@ class ProductReviewAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(ProductReview, ProductReviewAdmin)
+admin.site.register(CustomerReview, CustomerReviewAdmin)

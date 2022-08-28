@@ -1,6 +1,6 @@
 """ System Module """
 from django import forms
-from .models import ProductReview
+from .models import CustomerReview
 
 
 class AddReviewForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class AddReviewForm(forms.ModelForm):
         """
         Get model and add labels and widgets to the fields
         """
-        model = ProductReview
+        model = CustomerReview
         fields = ('review_text', 'review_rating')
         labels = {
             "review_text": "Review",

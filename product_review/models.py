@@ -12,7 +12,7 @@ RATING = (
 )
 
 
-class ProductReview(models.Model):
+class CustomerReview(models.Model):
     """"
     Creates product review
     """
