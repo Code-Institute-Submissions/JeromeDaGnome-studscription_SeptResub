@@ -191,3 +191,24 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
+
+
+@login_required
+def delete_review(request, pk):
+    """
+    Delete review
+    """
+    review = get_object_or_404(BoxReview, pk=pk)
+    if request.user == review.customer:
+        try:
+            review = get_object_or_404(BoxReview, pk=pk)
+            review.delete()
+            messages.success(request, 'Your review was deleted')
+            return redirect(reverse('box_details', args=[review.box.pk]))
+        except:
+            messages.error(request, 'Something went wrong.\
+                Your review was not deleted .')
+    else:
+        messages.error(request, 'Sorry, you do not have permittion \
+            to access this page')
+        return redirect(reverse('box_details', args=[review.box.pk]))
