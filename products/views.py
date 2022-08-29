@@ -77,7 +77,8 @@ def product_detail(request, product_id):
             review_rating=review_rating,
             review_text=review_text
             )
-        return redirect(reverse('product_details', args=[product.id]))
+        messages.success(request, "Your review was successfully added!")
+        return redirect(reverse('product_detail', args=[product.id]))
 
     review_form = AddReviewForm
     reviews = CustomerReview.objects.filter(product=product.id).order_by('-date_added')[:2]
@@ -108,7 +109,7 @@ def edit_review(request, pk):
                 context = {
                     'review': review,
                 }
-                return redirect(reverse('product_details', args=[review.product.pk]))
+                return redirect(reverse('product_detail', args=[review.product.pk]))
             else:
                 messages.error(request, 'Failed to edit your product.\
                     Please, ensure your form is valid')
@@ -122,7 +123,7 @@ def edit_review(request, pk):
         return render(request, 'product_review/edit_review.html', context)
     else:
         messages.info(request, 'Sorry, you cannot change this review.')
-        return redirect(reverse('product_details', args=[review.product.pk]))
+        return redirect(reverse('product_detail', args=[review.product.pk]))
 
 
 @login_required
