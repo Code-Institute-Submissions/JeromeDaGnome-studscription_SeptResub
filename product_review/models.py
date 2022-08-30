@@ -27,4 +27,3 @@ class CustomerReview(models.Model):
         Return product name rating on admin panel
         """
         return self.product.product_name
-        
