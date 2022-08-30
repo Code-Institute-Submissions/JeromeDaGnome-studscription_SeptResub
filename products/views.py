@@ -204,17 +204,17 @@ def delete_review(request, pk):
     """
     Delete review
     """
-    review = get_object_or_404(BoxReview, pk=pk)
+    review = get_object_or_404(CustomerReview, pk=pk)
     if request.user == review.customer:
         try:
-            review = get_object_or_404(BoxReview, pk=pk)
+            review = get_object_or_404(CustomerReview, pk=pk)
             review.delete()
             messages.success(request, 'Your review was deleted')
-            return redirect(reverse('box_details', args=[review.box.pk]))
+            return redirect(reverse('product_detail', args=[review.product.pk]))
         except:
             messages.error(request, 'Something went wrong.\
                 Your review was not deleted .')
     else:
-        messages.error(request, 'Sorry, you do not have permittion \
+        messages.error(request, 'Sorry, you do not have permition \
             to access this page')
-        return redirect(reverse('box_details', args=[review.box.pk]))
+        return redirect(reverse('product_detail', args=[review.product.pk]))
