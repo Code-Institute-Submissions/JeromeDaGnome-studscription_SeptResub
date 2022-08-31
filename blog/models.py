@@ -47,18 +47,3 @@ class Comment(models.Model):
     def __str__(self):
         return '%s -%s' % (self.post, self.name)
 
-
-class Characters(models.Model):
-    name = models.CharField(max_length=200)
-    # image = CloudinaryField('image', default='placeholder')
-    bio = models.TextField()
-    tag_lines = models.TextField()
-
-    class Meta:
-        ordering = ['name']
-
-    def __str__(self):
-        if not self.name:
-            return ""
-        else:
-            return self.name  # noqa

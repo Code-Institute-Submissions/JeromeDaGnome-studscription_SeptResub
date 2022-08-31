@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Characters
+from .models import Post, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -13,6 +13,4 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 @admin.register(Comment)
-@admin.register(Characters)
-class CharacterAdmin(admin.ModelAdmin):
-    list_filter = ()
+
