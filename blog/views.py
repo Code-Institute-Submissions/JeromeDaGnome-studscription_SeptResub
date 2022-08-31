@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.views import generic, View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView  # noqa
-from .models import Post, Comment, Characters
-from .forms import CommentForm, CharacterEditForm, CharacterAddForm
+from .models import Post, Comment
+from .forms import CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required

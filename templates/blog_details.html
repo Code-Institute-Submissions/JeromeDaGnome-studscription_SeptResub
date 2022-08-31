@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<h1>{{ post.title }}</h1>
+
+<div class="container text-center mb-5">
+    <div class="card">
+        <div class="card-blog-details">
+            <p> {{ post.content | safe }}</p>
+            <small class="blog_author">By: {{ post.author }}</small>
+            <hr />
+            <h2>Comments</h2>
+            <br />
+            {% if not post.comments.all %}
+            No Comments yet... <a class="btn" href="{% url 'add_comment' post.pk%}">Add one</a>
+            {% else %}
+            {% for comment in post.comments.all %}
+            <p><strong>
+                    {{ comment.name }} -
+                    {{ comment.created_on }}
+                </strong></p>
+            {{ comment.body }}
+            <br /> <br />
+            {% endfor %}
+            <a class=" btn" href="{% url 'add_comment' post.pk%}">Add Comment</a>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
