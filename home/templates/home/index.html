@@ -17,7 +17,7 @@
                 <h1 class="display-4 logo-font text-black">
                     The new sets are here!
                 </h1>
-                <div>
+                <div class="text-black">
                     Welcome to Studscription where you can find a Lego set delivery for every budget and skill level!
                 </div>
                 <div class="my-5">
@@ -28,4 +28,47 @@
             </div>
         </div>
     </div>
+    <div class="album py-5">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for post in post_list %}
+                <!-- Blog posts -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="image-container">
+                            <img class="bd-placeholder-img card-img-top"
+                                src=" {{ post.featured_image.url }}" alt="Featured blog image">
+                        </div>
+                        <div class="blog-card">
+                            <h3>{{ post.title }}</h3>
+                            <a href="{% url 'blog_detail' post.pk %}" class="post-link">{{ post.excerpt }}</a>
+                            <div class="blog-card-footer">
+                                <p>{{ post.created_on}}</p>
+                                <p>Author: {{ post.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 {% endblock %}
