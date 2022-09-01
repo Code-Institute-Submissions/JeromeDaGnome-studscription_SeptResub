@@ -12,5 +12,5 @@ class PostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content')
 
 
-@admin.register(Comment)
+# @admin.register(Comment)
 
