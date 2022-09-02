@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from blog_review.forms import AddReviewForm
-from blog_review.models import CustomerReview
+from blog_review.models import CustomerComment
 from .models import Blog
 from .forms import BlogForm
 
@@ -67,7 +67,7 @@ def blog_detail(request, blog_id):
         review_rating = request.POST.get('review_rating', 5)
         review_text = request.POST.get('review_text', '')
 
-        review = CustomerReview.objects.create(
+        review = CustomerComment.objects.create(
             blog=blog,
             customer=request.user,
             review_rating=review_rating,
@@ -77,7 +77,7 @@ def blog_detail(request, blog_id):
         return redirect(reverse('blog_detail', args=[blog.id]))
 
     review_form = AddReviewForm
-    reviews = CustomerReview.objects.filter(
+    reviews = CustomerComment.objects.filter(
         blog=blog.id).order_by('-date_added')[:2]
     context = {
         'blog': blog,
@@ -93,7 +93,7 @@ def edit_review(request, pk):
     """
     Edit reviews
     """
-    review = get_object_or_404(CustomerReview, pk=pk)
+    review = get_object_or_404(CustomerComment, pk=pk)
     if request.user == review.customer:
         if request.method == 'POST':
             form = AddReviewForm(request.POST, request.FILES, instance=review)
@@ -102,7 +102,7 @@ def edit_review(request, pk):
             if form.is_valid():
                 form.save()
 
-                review = get_object_or_404(CustomerReview, pk=pk)
+                review = get_object_or_404(CustomerComment, pk=pk)
                 context = {
                     'review': review,
                 }
@@ -198,10 +198,10 @@ def delete_review(request, pk):
     """
     Delete review
     """
-    review = get_object_or_404(CustomerReview, pk=pk)
+    review = get_object_or_404(CustomerComment, pk=pk)
     if request.user == review.customer:
         try:
-            review = get_object_or_404(CustomerReview, pk=pk)
+            review = get_object_or_404(CustomerComment, pk=pk)
             review.delete()
             messages.success(request, 'Your review was deleted')
             return redirect(reverse('blog_detail', args=[review.blog.pk]))

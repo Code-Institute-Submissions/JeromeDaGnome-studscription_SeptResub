@@ -2,9 +2,9 @@
 from django.apps import AppConfig
 
 
-class ProductReviewConfig(AppConfig):
+class BlogReviewConfig(AppConfig):
     """
-    Product review conf
+    Blog review conf
     """
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'product_review'
+    name = 'blog_review'

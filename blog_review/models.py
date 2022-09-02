@@ -1,7 +1,7 @@
 """ System Module """
 from django.db import models
 from django.contrib.auth.models import User
-from products.models import Product
+from blogs.models import Blog
 
 RATING = (
     (1, 1),
@@ -12,18 +12,18 @@ RATING = (
 )
 
 
-class CustomerReview(models.Model):
+class CustomerComment(models.Model):
     """"
-    Creates product review
+    Creates blog review
     """
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     review_text = models.TextField()
     review_rating = models.IntegerField(choices=RATING, default=0)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """
-        Return product name rating on admin panel
+        Return blog name rating on admin panel
         """
-        return self.product.product_name
+        return self.blog.blog_name

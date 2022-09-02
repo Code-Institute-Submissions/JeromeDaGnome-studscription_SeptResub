@@ -1,6 +1,6 @@
 """ System Module """
 from django.urls import path
-from products import views
+from blogs import views
 
 urlpatterns = [
     path("edit_review/<int:pk>/", views.edit_review, name="edit_review"),
