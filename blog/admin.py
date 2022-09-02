@@ -1,16 +1,21 @@
 from django.contrib import admin
-from .models import Post, Comment
-from django_summernote.admin import SummernoteModelAdmin
+from .models import Blog
+# Register your models here
 
 
-@admin.register(Post)
-class PostAdmin(SummernoteModelAdmin):
+class BlogAdmin(admin.ModelAdmin):
+    list_display = (
 
-    prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('status', 'created_on', 'title')
-    search_fileds = ['title', 'content']
-    summernote_fields = ('content')
+            'name',
+            'description',
+            'author',
+            'image',
+
+        )
 
 
-# @admin.register(Comment)
+ordering = ('name',)
+
+
+admin.site.register(Blog, BlogAdmin)
 

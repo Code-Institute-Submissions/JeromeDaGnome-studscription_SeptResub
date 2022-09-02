@@ -1,14 +1,14 @@
 from django import forms
-from .models import Comment
+from .widgets import CustomClearableFileInput
+from .models import Blog
 
 
-class CommentForm(forms.ModelForm):
+class BlogForm(forms.ModelForm):
+
     class Meta:
-        model = Comment
-        fields = ('name', 'body')
+        model = Blog
+        fields = '__all__'
 
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-        }
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
 
+    

@@ -1,11 +1,11 @@
-from . import views
 from django.urls import path
-
+from . import views
 
 urlpatterns = [
-    path('', views.HomeView.as_view(), name='home'),
-    path('blog/<int:pk>', views.BlogDetailView.as_view(), name='blog_detail'),
-    path('blog/<int:pk>/comment/',
-         views.AddCommentView.as_view(), name='add_comment'),
-    path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
+    path('', views.all_blogs, name='blogs'),
+    path('<int:blog_id>/', views.blog_detail, name='blog_detail'),
+    path('add/', views.add_blog, name='add_blog'),
+    path('edit/<int:blog_id>/', views.edit_blog, name='edit_blog'),
+    path('delete/<int:blog_id>/', views.delete_blog, name='delete_blog'),
+
 ]
