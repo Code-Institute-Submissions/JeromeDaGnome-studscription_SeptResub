@@ -17,7 +17,6 @@ def all_blogs(request):
 
     blogs = Blog.objects.all()
     query = None
-    categories = None
     sort = None
     direction = None
 
@@ -28,8 +27,6 @@ def all_blogs(request):
             if sortkey == 'name':
                 sortkey = 'lower_name'
                 blogs = blogs.annotate(lower_name=Lower('name'))
-            if sortkey == 'category':
-                sortkey = 'category__name'
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
@@ -55,7 +52,7 @@ def all_blogs(request):
         'current_sorting': current_sorting,
     }
 
-    return render(request, 'blogs/blogs.html', context)
+    return render(request, 'blogs/blog.html', context)
 
 
 def blog_detail(request, blog_id):
