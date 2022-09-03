@@ -16,9 +16,9 @@ def all_blogs(request):
     """ A view to show all blogs, including sorting and search queries """
 
     blogs = Blog.objects.all()
-    query = None
-    sort = None
-    direction = None
+    # query = None
+    # sort = None
+    # direction = None
 
     if request.GET:
         if 'sort' in request.GET:
@@ -44,15 +44,15 @@ def all_blogs(request):
                 description__icontains=query)
             blogs = blogs.filter(queries)
 
-    current_sorting = f'{sort}_{direction}'
+    # current_sorting = f'{sort}_{direction}'
 
     context = {
         'blogs': blogs,
-        'search_term': query,
-        'current_sorting': current_sorting,
+        # 'search_term': query,
+        # 'current_sorting': current_sorting,
     }
 
-    return render(request, 'blogs/blog.html', context)
+    return render(request, 'blogs.html', context)
 
 
 def blog_detail(request, blog_id):
