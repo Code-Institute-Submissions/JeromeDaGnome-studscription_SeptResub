@@ -52,7 +52,7 @@ def all_blogs(request):
         # 'current_sorting': current_sorting,
     }
 
-    return render(request, 'blogs.html', context)
+    return render(request, 'blogs/blogs.html', context)
 
 
 def blog_detail(request, blog_id):
