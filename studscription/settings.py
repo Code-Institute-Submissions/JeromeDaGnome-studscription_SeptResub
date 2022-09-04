@@ -14,7 +14,7 @@ import os
 import dj_database_url
 
 # import stripe
-# stripe.api_key = "sk_test_51LFR9kLrBu0qrSmRs6oA7gYQWaPxuWpZ3T2c5jb9bmQV7iWyrArNmUTAWiWCwBmkGmakqkVlVBYi6AUTEd4IkXx300ZtApspdx"
+#  stripe.api_key = "sk_test_51LFR9kLrBu0qrSmRs6oA7gYQWaPxuWpZ3T2c5jb9bmQV7iWyrArNmUTAWiWCwBmkGmakqkVlVBYi6AUTEd4IkXx300ZtApspdx"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
