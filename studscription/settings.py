@@ -14,7 +14,7 @@ import os
 import dj_database_url
 
 # import stripe
-#  stripe.api_key = "sk_test_51LFR9kLrBu0qrSmRs6oA7gYQWaPxuWpZ3T2c5jb9bmQV7iWyrArNmUTAWiWCwBmkGmakqkVlVBYi6AUTEd4IkXx300ZtApspdx"
+stripe.api_key = "sk_test_51LFR9kLrBu0qrSmRs6oA7gYQWaPxuWpZ3T2c5jb9bmQV7iWyrArNmUTAWiWCwBmkGmakqkVlVBYi6AUTEd4IkXx300ZtApspdx"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +25,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
-# SECRET_KEY = '(l^nekxo4tnqaaid3*l3+8ub3sd&ipg&hm-+#igb*af3vhl3u6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'DEVELOPMENT' in os.environ
