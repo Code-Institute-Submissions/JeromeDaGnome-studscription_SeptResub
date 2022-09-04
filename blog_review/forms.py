@@ -12,10 +12,9 @@ class AddReviewForm(forms.ModelForm):
         Get model and add labels and widgets to the fields
         """
         model = CustomerComment
-        fields = ('review_text', 'review_rating')
+        fields = ('review_text',)
         labels = {
-            "review_text": "Review",
-            "review_rating": "Rating"
+            "review_text": "Comment",
         }
         widgets = {
             'review_text': forms.Textarea(attrs={'rows': 3})
